@@ -14,3 +14,5 @@ Uses the JSONPlaceholder for user information and the RoboHash API for the robot
 * RoboHash API
 * React-Redux
 * Tachyons for styling
+
+![RoboFriends](images/robofriends.png)
