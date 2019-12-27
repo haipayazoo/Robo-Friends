@@ -7,7 +7,7 @@ import CardList from './CardList';
 
 configure({ adapter: new Adapter() });
 
-it('expect to render Card component', () => {
+it('expect to render CardList component', () => {
 	const mockRobots = [
 		{
 			id: 1,
