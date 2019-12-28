@@ -1,5 +1,5 @@
+import { shallow } from 'enzyme';
 import React from 'react';
-import renderer from 'react-test-renderer';
 
 import CardList from './CardList';
 
@@ -12,6 +12,5 @@ it('expect to render CardList component', () => {
 			email: 'john@gmail.com'
 		}
 	];
-	const tree = renderer.create(<CardList robots={mockRobots} />).toJSON();
-	expect(tree).toMatchSnapshot();
+	expect(shallow(<CardList robots={mockRobots} />)).toMatchSnapshot();
 });

@@ -2,21 +2,11 @@
 
 exports[`expect to render CardList component 1`] = `
 <div>
-  <div
-    className="tc bg-light-green dib br3 pa3 ma2 grow bw2 shadow-5"
-  >
-    <img
-      alt="robots"
-      src="https://robohash.org/1?size=200x200"
-    />
-    <div>
-      <h2>
-        John Snow
-      </h2>
-      <p>
-        john@gmail.com
-      </p>
-    </div>
-  </div>
+  <Card
+    email="john@gmail.com"
+    id={1}
+    key="0"
+    name="John Snow"
+  />
 </div>
 `;

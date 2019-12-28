@@ -7,6 +7,6 @@ exports[`expect to render CounterButton component 1`] = `
   onClick={[Function]}
 >
   Count: 
-  1
+  0
 </button>
 `;
