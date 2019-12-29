@@ -2,13 +2,12 @@ import * as actions from './actions';
 import {
 	CHANGE_SEARCH_FIELD,
 	REQUEST_ROBOTS_PENDING,
-	REQUEST_ROBOTS_SUCCESS,
-	REQUEST_ROBOTS_FAILED
+	REQUEST_ROBOTS_SUCCESS
 } from './constants';
 
 import configureMockStore from 'redux-mock-store';
 import thunkMiddleware from 'redux-thunk';
-import fetchMock from 'fetch-mock';
+import nock from 'nock';
 
 const mockStore = configureMockStore([thunkMiddleware]);
 
@@ -24,28 +23,33 @@ it('should create an action to search robots', () => {
 
 describe('async actions', () => {
 	afterEach(() => {
-		fetchMock.restore();
+		nock.cleanAll();
 	});
 
 	it('handles requesting robots API', () => {
 		const store = mockStore();
 		store.dispatch(actions.requestRobots());
-		const action = store.getActions();
 		const expectedAction = {
 			type: REQUEST_ROBOTS_PENDING
 		};
-		expect(action[0]).toEqual(expectedAction);
+
+		return store.dispatch(actions.requestRobots()).then(() => {
+			expect(store.getActions()[0]).toEqual(expectedAction);
+		});
 	});
 
 	it('handles successful requests to robots API', () => {
-		fetchMock.getOnce('', {
-			body: {
-				id: '1',
-				name: 'John Snow',
-				email: 'johnsnow@gmail.com'
-			},
-			headers: { 'content-type': 'application/json' }
-		});
+		nock('https://jsonplaceholder.typicode.com')
+			.get('/users')
+			.reply(
+				200,
+				{
+					id: '1',
+					name: 'John Snow',
+					email: 'johnsnow@gmail.com'
+				},
+				{ 'Access-Control-Allow-Origin': '*' }
+			);
 
 		const store = mockStore();
 
